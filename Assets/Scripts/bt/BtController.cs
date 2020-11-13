@@ -15,11 +15,9 @@ public class BtController : MonoBehaviour
         BtNode stickyTarget = new Selector(isTargetSelected, new TargetRandom("pill"));
 
         BtNode wonderToPill = new Sequence(stickyTarget, new TowardsTarget());
-        return wonderToPill;
 
-        //BtNode chasePlayer = new Sequence(new TargetPlayer("Player"), new IsClose(3), new TowardsTarget());
-        //return chasePlayer;
-        //return new Selector(chasePlayer, wonderToPill);
+        BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget());
+        return new Selector(chasePlayer, wonderToPill);
     }
 
     // Start is called before the first frame update
