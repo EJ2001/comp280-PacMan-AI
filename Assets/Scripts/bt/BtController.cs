@@ -7,20 +7,63 @@ public class BtController : MonoBehaviour
     private BtNode m_root;
     private Blackboard m_blackboard;
 
-    // method to create the tree, sorry - no GUI for this we need to build it by hand
-    protected BtNode createTree() {
-        BtNode stickyTarget = new Selector(new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1))), new TargetRandom("pill"));
-        BtNode wonderToPill = new Sequence(stickyTarget, new TowardsTarget());
-        return wonderToPill;
-
-        //BtNode chasePlayer = new Sequence(new TargetPlayer("Player"), new IsClose(3), new TowardsTarget());
-        //return new Selector(chasePlayer, wonderToPill);
+    public BtNode wonderToPill()
+    {
+        BtNode isTargetSelected = new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1))); 
+        BtNode stickyTarget = new Selector(isTargetSelected, new TargetRandom("pill")); 
+        return new Sequence(stickyTarget, new TowardsTarget());
     }
+
+    // method to create the tree, sorry - no GUI for this we need to build it by hand
+    
+    protected BtNode createTreeInky()
+    {
+        Debug.Log("Inky");
+        //BtNode isPlayerInDistance = new Sequence(new TargetPlayer("Player"), new IsClose(4));
+        BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget());
+        return new Selector(chasePlayer, wonderToPill());
+    }
+    protected BtNode createTreePinky()
+    {
+        Debug.Log("Pinky");
+        BtNode isTargetSelected = new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1)));
+        BtNode stickyTarget = new Selector(new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1))), new TargetRandom("pill"));
+        
+        BtNode wonderToPill = new Sequence(stickyTarget, new TowardsTarget());
+        BtNode chasePlayer = new Sequence(new TargetPlayer("Player"), new IsClose(3), new TowardsTarget());
+        return new Selector(chasePlayer, wonderToPill);
+    }
+    protected BtNode createTreeBlinky()
+    {
+        Debug.Log("Blinky");
+        BtNode isTargetSelected = new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1)));
+        BtNode stickyTarget = new Selector(new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1))), new TargetRandom("pill"));
+        
+        BtNode wonderToPill = new Sequence(stickyTarget, new TowardsTarget());
+        BtNode chasePlayer = new Sequence(new TargetPlayer("Player"), new IsClose(3), new TowardsTarget());
+        return new Selector(chasePlayer, wonderToPill);
+    }
+    protected BtNode createTreeClyde()
+    {
+        Debug.Log("Clyde");
+        BtNode isTargetSelected = new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1)));
+        BtNode stickyTarget = new Selector(new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1))), new TargetRandom("pill"));
+        
+        BtNode wonderToPill = new Sequence(stickyTarget, new TowardsTarget());
+        BtNode chasePlayer = new Sequence(new IsTagClose(3, "Player"), new TowardsTarget());
+        return new Selector(chasePlayer, wonderToPill);
+    }
+
 
     // Start is called before the first frame update
     void Start() {
         if ( m_root == null) {
-            m_root = createTree();
+
+            if(this.gameObject.name == "Inky")  { m_root = createTreeInky(); }
+            else if(this.gameObject.name == "Pinky")  {  m_root = createTreePinky();  }
+            else if(this.gameObject.name == "Blinky")  { m_root = createTreeBlinky(); }
+            else if(this.gameObject.name == "Clyde") { m_root = createTreeClyde(); }
+           
             m_blackboard = new Blackboard();
             m_blackboard.owner = gameObject;
         }
