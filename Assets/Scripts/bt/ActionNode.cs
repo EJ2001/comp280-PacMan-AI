@@ -33,4 +33,9 @@ public class ActionNode : BtNode {
         }
     }
 
+    public override string getName()
+    {
+        return "Action";
+    }
+
 }

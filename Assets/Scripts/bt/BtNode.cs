@@ -26,5 +26,11 @@ public abstract class BtNode {
         m_nodeState = NodeState.RUNNING;
     }
 
+    public virtual IEnumerable<BtNode> children()
+    {
+        return new List<BtNode>();
+    }
+
     public abstract NodeState evaluate(Blackboard blackboard);
+    public abstract string getName();
 }

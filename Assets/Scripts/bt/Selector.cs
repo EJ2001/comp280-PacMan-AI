@@ -25,6 +25,11 @@ public class Selector : BtNode
         reset();
     }
 
+    public override IEnumerable<BtNode> children()
+    {
+        return m_nodes;
+    }
+
     public override void reset()
     {
         m_nodeState = NodeState.RUNNING;
@@ -96,6 +101,11 @@ public class Selector : BtNode
 
         m_nodeState = NodeState.FAILURE;
         return m_nodeState;
+    }
+
+    public override string getName()
+    {
+        return "Selector";
     }
 
 }

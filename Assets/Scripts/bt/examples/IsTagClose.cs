@@ -39,9 +39,9 @@ public class IsTagClose : BtNode
         }
     }
 
-    //public override string GetName()
-    //{
-     //   return "isTagClose";
-    //}
+     public override string getName()
+    {
+        return "isTagClose";
+    }
 
 }

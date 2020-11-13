@@ -24,4 +24,9 @@ public class TargetRandom : BtNode
         m_nodeState = NodeState.SUCCESS;
         return m_nodeState;
     }
+
+    public override string getName()
+    {
+        return "TargetRandom";
+    }
 }

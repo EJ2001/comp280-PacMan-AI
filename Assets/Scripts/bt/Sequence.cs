@@ -21,6 +21,11 @@ public class Sequence : BtNode {
         reset();
     }
 
+    public override IEnumerable<BtNode> children()
+    {
+        return m_nodes;
+    }
+
     public override void reset() {
         m_nodeState = NodeState.RUNNING;
         runningNode = 0;
@@ -84,5 +89,10 @@ public class Sequence : BtNode {
 
         m_nodeState = anyChildRunning ? NodeState.RUNNING : NodeState.SUCCESS;
         return m_nodeState;
+    }
+
+    public override string getName()
+    {
+        return "Sequence";
     }
 }

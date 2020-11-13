@@ -28,4 +28,9 @@ public class IsTargeting : BtNode
         }
     }
 
+    public override string getName()
+    {
+        return "isTargeting";
+    }
+
 }

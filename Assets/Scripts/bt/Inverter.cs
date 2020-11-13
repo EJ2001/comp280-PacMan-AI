@@ -37,4 +37,9 @@ public class Inverter : BtNode
         return m_nodeState;
     }
 
+    public override string getName()
+    {
+        return "Invert";
+    }
+
 }

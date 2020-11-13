@@ -30,4 +30,9 @@ public class TargetPlayer : BtNode {
         }
         return NodeState.FAILURE;
     }
+
+    public override string getName()
+    {
+        return "TargetPlayer";
+    }
 }
