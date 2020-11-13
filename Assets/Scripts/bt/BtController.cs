@@ -7,6 +7,7 @@ public class BtController : MonoBehaviour
     private BtNode m_root;
     private Blackboard m_blackboard;
 
+    //Public method for the original wonder to pill 
     public BtNode wonderToPill()
     {
         BtNode isTargetSelected = new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1))); 
@@ -15,7 +16,6 @@ public class BtController : MonoBehaviour
     }
 
     // method to create the tree, sorry - no GUI for this we need to build it by hand
-    
     protected BtNode createTreeInky()
     {
         Debug.Log("Inky");
