@@ -2671,7 +2671,7 @@ PrefabInstance:
     - target: {fileID: 575204773655746970, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9220051751308053452, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
@@ -4275,7 +4275,7 @@ PrefabInstance:
     - target: {fileID: 575204773655746970, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 844f842ed20f2614da2e53867a98692f, type: 3}
@@ -11172,6 +11172,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Inky
+      objectReference: {fileID: 0}
+    - target: {fileID: 575204773655746970, guid: 844f842ed20f2614da2e53867a98692f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 844f842ed20f2614da2e53867a98692f, type: 3}

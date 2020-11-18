@@ -26,32 +26,23 @@ public class BtController : MonoBehaviour
     protected BtNode createTreePinky()
     {
         Debug.Log("Pinky");
-        BtNode isTargetSelected = new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1)));
-        BtNode stickyTarget = new Selector(new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1))), new TargetRandom("pill"));
-        
-        BtNode wonderToPill = new Sequence(stickyTarget, new TowardsTarget());
-        BtNode chasePlayer = new Sequence(new TargetPlayer("Player"), new IsClose(3), new TowardsTarget());
-        return new Selector(chasePlayer, wonderToPill);
+         BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget());
+        return new Selector(chasePlayer, wonderToPill());
     }
+
+    // Blinky's behaviour consists of constantly chasing the player with an unlimited
     protected BtNode createTreeBlinky()
     {
         Debug.Log("Blinky");
-        BtNode isTargetSelected = new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1)));
-        BtNode stickyTarget = new Selector(new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1))), new TargetRandom("pill"));
-        
-        BtNode wonderToPill = new Sequence(stickyTarget, new TowardsTarget());
-        BtNode chasePlayer = new Sequence(new TargetPlayer("Player"), new IsClose(3), new TowardsTarget());
-        return new Selector(chasePlayer, wonderToPill);
+        BtNode RageMode = new Sequence(new IsRage(2),new IsTagClose(30, "Player"), new TowardsTarget());
+        BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget());
+        return new Selector(chasePlayer, RageMode, wonderToPill());
     }
     protected BtNode createTreeClyde()
     {
         Debug.Log("Clyde");
-        BtNode isTargetSelected = new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1)));
-        BtNode stickyTarget = new Selector(new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1))), new TargetRandom("pill"));
-        
-        BtNode wonderToPill = new Sequence(stickyTarget, new TowardsTarget());
         BtNode chasePlayer = new Sequence(new IsTagClose(3, "Player"), new TowardsTarget());
-        return new Selector(chasePlayer, wonderToPill);
+        return new Selector(chasePlayer, wonderToPill());
     }
 
 
