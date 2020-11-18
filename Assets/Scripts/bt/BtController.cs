@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BtController : MonoBehaviour
 {
     private BtNode m_root;
     private Blackboard m_blackboard;
+
+    //For Blinky's renderer reference
+    private MeshRenderer rend = null;
+    private Color defColor;
+
 
     //Public method for the original wonder to pill 
     public BtNode wonderToPill()
@@ -26,15 +32,15 @@ public class BtController : MonoBehaviour
     protected BtNode createTreePinky()
     {
         Debug.Log("Pinky");
-         BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget());
+        BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget());
         return new Selector(chasePlayer, wonderToPill());
     }
 
-    // Blinky's behaviour consists of constantly chasing the player with an unlimited
     protected BtNode createTreeBlinky()
     {
-        Debug.Log("Blinky");
-        BtNode RageMode = new Sequence(new IsRage(2),new IsTagClose(30, "Player"), new TowardsTarget());
+        // This is Blinky's unique behaviour that will go into rage mode and target the player after a certain score
+        // is reached also with a rage time and a renderer which will hold the default color.
+        BtNode RageMode = new Sequence(new IsRage(20, 6f, defColor),new IsTagClose(30, "Player"), new TowardsTarget());
         BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget());
         return new Selector(chasePlayer, RageMode, wonderToPill());
     }
@@ -52,7 +58,12 @@ public class BtController : MonoBehaviour
 
             if(this.gameObject.name == "Inky")  { m_root = createTreeInky(); }
             else if(this.gameObject.name == "Pinky")  {  m_root = createTreePinky();  }
-            else if(this.gameObject.name == "Blinky")  { m_root = createTreeBlinky(); }
+            else if(this.gameObject.name == "Blinky")
+            { 
+                rend = GetComponent<MeshRenderer>(); 
+                defColor = rend.material.color;
+                m_root = createTreeBlinky();
+            }
             else if(this.gameObject.name == "Clyde") { m_root = createTreeClyde(); }
            
             m_blackboard = new Blackboard();
