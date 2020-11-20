@@ -8,47 +8,52 @@ public class BtController : MonoBehaviour
     private BtNode m_root;
     private Blackboard m_blackboard;
 
-    //For Blinky's renderer reference
+    //Blinky's references
     private MeshRenderer rend = null;
     private Color defColor;
 
-
     //Public method for the original wonder to pill 
-    public BtNode wonderToPill()
+    public BtNode wonderToPill(float speed)
     {
         BtNode isTargetSelected = new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1))); 
         BtNode stickyTarget = new Selector(isTargetSelected, new TargetRandom("pill")); 
-        return new Sequence(stickyTarget, new TowardsTarget());
+        return new Sequence(stickyTarget, new TowardsTarget(speed));
     }
 
-    // method to create the tree, sorry - no GUI for this we need to build it by hand
-    protected BtNode createTreeInky()
-    {
-        Debug.Log("Inky");
-        //BtNode isPlayerInDistance = new Sequence(new TargetPlayer("Player"), new IsClose(4));
-        BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget());
-        return new Selector(chasePlayer, wonderToPill());
-    }
-    protected BtNode createTreePinky()
-    {
-        Debug.Log("Pinky");
-        BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget());
-        return new Selector(chasePlayer, wonderToPill());
-    }
+    // Behaviour Trees for each ghost
 
+    // This is Blinky's unique behaviour that will go into rage mode and target the player after a certain score
+    // is reached also with a rage time and a renderer which will hold the default color.
     protected BtNode createTreeBlinky()
     {
-        // This is Blinky's unique behaviour that will go into rage mode and target the player after a certain score
-        // is reached also with a rage time and a renderer which will hold the default color.
-        BtNode RageMode = new Sequence(new IsRage(20, 6f, defColor),new IsTagClose(30, "Player"), new TowardsTarget());
-        BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget());
-        return new Selector(chasePlayer, RageMode, wonderToPill());
+        BtNode RageMode = new Sequence(new IsRage(20, 6f, defColor),new IsTagClose(Mathf.Infinity, "Player"), new TowardsTarget(7f));
+        BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget(3.5f));
+        return new Selector(chasePlayer, RageMode, wonderToPill(3.5f));
     }
+
+    //Here is the behaviour tree for Pinky the behaviour I have created will allow Pinky to go invisible when it detects the player, Pinky also has a short distance to 
+    //see the player. The invisiblity also has a timer.
+    protected BtNode createTreePinky()
+    {
+        BtNode chasePlayer = new Sequence(new IsTagClose(5, "Player"), new TowardsTarget(3.5f));
+        BtNode goInvisible = new Sequence(chasePlayer, new Invisible(4f));
+        BtNode Detection = new Selector(goInvisible, chasePlayer);
+        return new Selector(Detection, wonderToPill(3.5f));
+    }
+
+    //Not finished behaviour yet
+    protected BtNode createTreeInky()
+    {
+        //BtNode isPlayerInDistance = new Sequence(new TargetPlayer("Player"), new IsClose(4));
+        BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget(3.5f));
+        return new Selector(chasePlayer, wonderToPill(3.5f));
+    }
+
+    //Not finished behaviour yet
     protected BtNode createTreeClyde()
     {
-        Debug.Log("Clyde");
-        BtNode chasePlayer = new Sequence(new IsTagClose(3, "Player"), new TowardsTarget());
-        return new Selector(chasePlayer, wonderToPill());
+        BtNode chasePlayer = new Sequence(new IsTagClose(3, "Player"), new TowardsTarget(3.5f));
+        return new Selector(chasePlayer, wonderToPill(3.5f));
     }
 
 

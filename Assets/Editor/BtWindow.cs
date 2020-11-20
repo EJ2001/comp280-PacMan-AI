@@ -19,7 +19,7 @@ public class BtWindow : EditorWindow
         BtNode isTargetSelected = new Sequence(new IsTargeting("pill"), new Inverter(new IsClose(1)));
         BtNode stickyTarget = new Selector(isTargetSelected, new TargetRandom("pill"));
 
-        BtNode wonderToPill = new Sequence(stickyTarget, new TowardsTarget());
+        BtNode wonderToPill = new Sequence(stickyTarget, new TowardsTarget(3.5f));
         return wonderToPill;
 
         //BtNode chasePlayer = new Sequence(new TargetPlayer("Player"), new IsClose(3), new TowardsTarget());

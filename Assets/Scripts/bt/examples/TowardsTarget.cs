@@ -5,12 +5,20 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class TowardsTarget : BtNode {
+public class TowardsTarget : BtNode
+{
     private NavMeshAgent m_agent;
-
+    private float _speed;
+    
+    public TowardsTarget(float speed)
+    {          
+        _speed = speed;  
+    }
+    
     public override NodeState evaluate(Blackboard blackboard) {
         if (m_agent == null) {
             m_agent = blackboard.owner.GetComponent<NavMeshAgent>();
+            m_agent.speed = _speed;
         }
 
         // if target is null, we can't move towards it!
