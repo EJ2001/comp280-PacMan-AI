@@ -10,6 +10,7 @@ public class TowardsTarget : BtNode
     private NavMeshAgent m_agent;
     private float _speed;
     
+    //Created method to hold the speed variable for the ghosts
     public TowardsTarget(float speed)
     {          
         _speed = speed;  
