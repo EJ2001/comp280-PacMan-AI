@@ -5,12 +5,20 @@ using UnityEngine.AI;
 
 public class BtController : MonoBehaviour
 {
+    
+    private float ghostSpeed;
     private BtNode m_root;
     private Blackboard m_blackboard;
 
     //Blinky's references
     private MeshRenderer rend = null;
     private Color defColor;
+
+    //Inky's references
+    [SerializeField] Mesh pill_mesh = null;
+    [SerializeField] Material pill_mat = null;
+    private Mesh ghost_mesh = null;
+    private Material ghost_mat = null;
 
     //Public method for the original wonder to pill method
     public BtNode wonderToPill(float speed)
@@ -41,12 +49,16 @@ public class BtController : MonoBehaviour
         return new Selector(Detection, wonderToPill(3.5f));  
     }
 
-    //Not finished behaviour yet
+    //The behaviour of Inky is that a trap will be created when Inky is near the player, Inky will camouflage into a pill and create a suprise attack when the player
+    // is very close
     protected BtNode createTreeInky()
     {
-        //BtNode isPlayerInDistance = new Sequence(new TargetPlayer("Player"), new IsClose(4));
-        BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget(3.5f));
-        return new Selector(chasePlayer, wonderToPill(3.5f));
+        ghostSpeed = 3.5f;
+        float distanceToAppear = 5;
+        float distanceToCamouflage = 10;
+        BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget(ghostSpeed));
+        BtNode createTrap = new Sequence(new IsTagClose(distanceToCamouflage, "Player"), new CreateTrap(distanceToAppear, pill_mesh, ghost_mesh, pill_mat, ghost_mat), chasePlayer);
+        return new Selector(createTrap, wonderToPill(ghostSpeed));
     }
 
     //Not finished behaviour yet
@@ -62,19 +74,21 @@ public class BtController : MonoBehaviour
     {
         if ( m_root == null) {
             //Here I created some if statements to check the names of the ghosts and create the individual trees
-            if(this.gameObject.name == "Inky")
+            if(this.gameObject.name == "Blinky")
             { 
+                rend = GetComponent<MeshRenderer>(); 
+                defColor = rend.material.color;
+                m_root = createTreeBlinky();
+            }
+            else if(this.gameObject.name == "Inky")
+            { 
+                ghost_mat = GetComponent<Renderer>().material;
+                ghost_mesh = GetComponent<MeshFilter>().mesh;
                 m_root = createTreeInky(); 
             }
             else if(this.gameObject.name == "Pinky")
             {  
                 m_root = createTreePinky();
-            }
-            else if(this.gameObject.name == "Blinky")
-            { 
-                rend = GetComponent<MeshRenderer>(); 
-                defColor = rend.material.color;
-                m_root = createTreeBlinky();
             }
             else if(this.gameObject.name == "Clyde")
             { 

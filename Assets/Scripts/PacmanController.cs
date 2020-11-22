@@ -7,7 +7,7 @@ public class PacmanController : MonoBehaviour
     public const float POWER_PILL_TIMER = 10;
     public const int PILL_SCORE = 10;
     public const int GHOST_SCORE = 100;
-    public const float SPEED_FACTOR = 2.5F;
+    public const float SPEED_FACTOR = 4F;
 
     private Rigidbody body;
     private GameController game;
