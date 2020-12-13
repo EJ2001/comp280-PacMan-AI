@@ -38,6 +38,7 @@ public class CreateTrap : BtNode
         rend.material = pill_material;
         ghost_mesh.mesh = pill_Mesh;
         m_agent.isStopped = true;
+        blackboard.owner.GetComponent<BtController>().isHiding = true;
 
         float distance = (blackboard.owner.transform.position - blackboard.target.transform.position).magnitude;
         if(distance <= distance_ToAppear)
@@ -47,6 +48,7 @@ public class CreateTrap : BtNode
             rend.material = ghost_material;
             ghost_mesh.mesh = def_mesh;
             m_agent.isStopped = false;
+            blackboard.owner.GetComponent<BtController>().isHiding = false;
             return NodeState.SUCCESS;
         }
            
