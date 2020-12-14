@@ -2683,7 +2683,7 @@ PrefabInstance:
     - target: {fileID: 575204773655746970, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269452321919953869, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
@@ -2700,6 +2700,11 @@ PrefabInstance:
       propertyPath: inkyPos
       value: 
       objectReference: {fileID: 227338585}
+    - target: {fileID: 2269452321919953869, guid: 844f842ed20f2614da2e53867a98692f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6407823075452729197, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
       propertyPath: m_Constraints
@@ -2794,13 +2799,18 @@ PrefabInstance:
     - target: {fileID: 575204773655746970, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269452321919953869, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 319126357}
+    - target: {fileID: 2269452321919953869, guid: 844f842ed20f2614da2e53867a98692f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6407823075452729197, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
       propertyPath: m_Constraints
@@ -4479,7 +4489,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 9b1e536e49334374b890087b1140f2ce, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -16021,7 +16031,7 @@ PrefabInstance:
     - target: {fileID: 575204773655746970, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2269452321919953869, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
@@ -16048,6 +16058,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 319126357}
+    - target: {fileID: 2269452321919953869, guid: 844f842ed20f2614da2e53867a98692f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6407823075452729197, guid: 844f842ed20f2614da2e53867a98692f,
         type: 3}
       propertyPath: m_Constraints

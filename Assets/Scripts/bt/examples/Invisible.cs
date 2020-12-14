@@ -24,6 +24,7 @@ public class Invisible : BtNode
         }
         else if(time_Invis <= 0)
         {
+            particle.Clear();
             particle.Stop();
             rend.enabled = true;
             return NodeState.FAILURE;
