@@ -41,8 +41,8 @@ public class BtController : MonoBehaviour
     // is reached also with a rage time and a renderer which will hold the default color.
     protected BtNode createTreeBlinky()
     {
-        ghostSpeed = 3.5f;
-        float rageSpeed = 7f;
+        ghostSpeed = 3.3f;
+        float rageSpeed = 5f;
         int pillScoreToReach = 20;
         float TimeToRage = 6f;
         
@@ -56,7 +56,7 @@ public class BtController : MonoBehaviour
     //see the player. The invisiblity has a timer which will countdown when Blinky goes invisible.
     protected BtNode createTreePinky()
     {
-        ghostSpeed = 3.5f;
+        ghostSpeed = 3.3f;
         float invisibleTime = 3f;
 
         BtNode chasePlayer = new Sequence(new IsTagClose(10, "Player"), new TowardsTarget(ghostSpeed));
@@ -70,9 +70,9 @@ public class BtController : MonoBehaviour
     // is very close
     protected BtNode createTreeInky()
     {
-        ghostSpeed = 3.5f;
-        float distanceToAppear = 5;
-        float distanceToTrap = 10;
+        ghostSpeed = 3.3f;
+        float distanceToAppear = 5.3f;
+        float distanceToTrap = 10.5f;
 
         BtNode chasePlayer = new Sequence(new IsTagClose(12, "Player"), new TowardsTarget(ghostSpeed));
         BtNode createTrap = new Sequence(new IsTagClose(distanceToTrap, "Player"), new CreateTrap(distanceToAppear, pill_mesh, ghost_mesh, pill_mat, ghost_mat), chasePlayer);

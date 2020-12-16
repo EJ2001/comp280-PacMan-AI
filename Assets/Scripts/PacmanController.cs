@@ -7,11 +7,13 @@ public class PacmanController : MonoBehaviour
     public const float POWER_PILL_TIMER = 10;
     public const int PILL_SCORE = 10;
     public const int GHOST_SCORE = 100;
-    public const float SPEED_FACTOR = 7.5F;
+    public const float SPEED_FACTOR = 2.5F;
 
     private Rigidbody body;
     private GameController game;
     public float invulnTimer;
+
+    [SerializeField] Transform startPos;
 
     // Start is called before the first frame update
     void Start()
@@ -50,10 +52,12 @@ public class PacmanController : MonoBehaviour
             {
                 game.score += GHOST_SCORE;
                 Destroy(col.gameObject);
-            } else {
+            } else if(game.lives > 0){
                 Debug.Log("test");
                 game.lives--;
-                Destroy(gameObject);
+                this.gameObject.transform.position = startPos.position;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+                //Destroy(gameObject);
             }
         }
     }

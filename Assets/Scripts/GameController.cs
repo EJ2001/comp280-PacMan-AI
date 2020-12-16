@@ -10,7 +10,10 @@ public class GameController : MonoBehaviour
 
     public Text scoreText;
     public Text livesText;
+    public Text invulnTimer;
     public GameObject gameOverText;
+
+    public PacmanController pacman;
 
     // Start is called before the first frame update
     void Start()
@@ -30,5 +33,6 @@ public class GameController : MonoBehaviour
         // update labels
         scoreText.text = "score: " + score;
         livesText.text = "lives: " + lives;
+        invulnTimer.text = "invuln timer: " + pacman.invulnTimer;
     }
 }

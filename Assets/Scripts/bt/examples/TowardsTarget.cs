@@ -28,7 +28,7 @@ public class TowardsTarget : BtNode
         }
 
         m_agent.SetDestination(blackboard.target.transform.position);
-        Debug.Log("Agent: " + blackboard.owner.name + ", Target: " + blackboard.target.name);
+        //Debug.Log("Agent: " + blackboard.owner.name + ", Target: " + blackboard.target.name);
         if ( Vector3.Distance(blackboard.owner.transform.position, blackboard.target.transform.position) < 0.5 )
         {
             return NodeState.RUNNING;
