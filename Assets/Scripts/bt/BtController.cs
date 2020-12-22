@@ -71,7 +71,7 @@ public class BtController : MonoBehaviour
     protected BtNode createTreeInky()
     {
         ghostSpeed = 3.3f;
-        float distanceToAppear = 5.3f;
+        float distanceToAppear = 5.7f;
         float distanceToTrap = 10.5f;
 
         BtNode chasePlayer = new Sequence(new IsTagClose(12, "Player"), new TowardsTarget(ghostSpeed));

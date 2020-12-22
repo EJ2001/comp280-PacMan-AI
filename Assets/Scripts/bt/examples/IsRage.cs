@@ -25,6 +25,7 @@ public class IsRage : BtNode
         // starts an if statement to evaluate if the blackboard target is null and if it is it will return failure
         if ( blackboard.target == null)
         {
+            renderer.material.color = default_color;
             return NodeState.FAILURE;
         }
 

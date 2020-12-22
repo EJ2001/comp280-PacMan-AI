@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
         if (lives == 0)
         {
             gameOverText.SetActive(true);
+            Destroy(pacman.gameObject);
         }
 
         // update labels

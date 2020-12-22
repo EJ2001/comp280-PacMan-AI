@@ -20,7 +20,6 @@ public class IsTargeting : BtNode
 
         if (blackboard.target.tag == m_targetTag && blackboard.target.activeInHierarchy)
         {
-            Debug.Log("keeping pill selected");
             return NodeState.SUCCESS;
         } else
         {

@@ -13,6 +13,8 @@ public class CreateTrap : BtNode
     private Material pill_material;
     private NavMeshAgent m_agent;
 
+    
+    // Constructor for the node which holds the references needed
     public CreateTrap(float distanceToAppear, Mesh pill, Mesh defaultMesh, Material pillMaterial, Material defMat)
     {
         distance_ToAppear = distanceToAppear;
